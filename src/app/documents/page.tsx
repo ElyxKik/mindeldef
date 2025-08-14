@@ -1,26 +1,48 @@
 import Section from "@/components/common/Section";
-import CardDocument from "@/components/cards/CardDocument";
+import Image from "next/image";
+import { Metadata } from "next";
+import DocumentsClient from "./DocumentsClient";
+
+export const metadata: Metadata = {
+  title: "Documents officiels | Ministère délégué à la Défense",
+  description: "Consultez les documents officiels du Ministère délégué à la Défense : décrets, arrêtés, circulaires, rapports et autres publications administratives.",
+  openGraph: {
+    title: "Documents officiels | Ministère délégué à la Défense",
+    description: "Consultez les documents officiels du Ministère délégué à la Défense : décrets, arrêtés, circulaires, rapports et autres publications administratives.",
+    images: ['/images/placeholder-documents-hero.jpg'],
+  },
+};
 
 export default function Page() {
-  const docs = [
-    { title: "Décret n°2025-001", href: "/documents/1", type: "Décret", service: "Défense", date: "2025-07-01" },
-    { title: "Rapport annuel 2024", href: "/documents/2", type: "Rapport", service: "SG", date: "2025-02-20" },
-    { title: "Circulaire 15/2025", href: "/documents/3", type: "Circulaire", service: "Cabinet", date: "2025-06-12" },
-  ];
   return (
-    <Section>
-      <h1 className="text-2xl font-semibold tracking-tight">Documents officiels</h1>
-      <div className="mt-4 grid gap-3 grid-cols-1 md:grid-cols-4">
-        <select className="border rounded px-3 py-2"><option>Type</option></select>
-        <select className="border rounded px-3 py-2"><option>Année</option></select>
-        <select className="border rounded px-3 py-2"><option>Service</option></select>
-        <input className="border rounded px-3 py-2" placeholder="Mot-clé" />
+    <>
+      {/* Hero section avec image Documents */}
+      <div className="relative h-[40vh] min-h-[320px] max-h-[480px] w-full overflow-hidden">
+        <div className="absolute inset-0 bg-[var(--color-primary)]/90 z-10" />
+        <Image
+          src="/images/placeholder-documents-hero.jpg"
+          alt="Documents officiels du Ministère délégué à la Défense"
+          fill
+          priority
+          className="object-cover object-center opacity-40"
+          sizes="100vw"
+        />
+        <div className="relative z-20 h-full flex flex-col justify-end">
+          <div className="container mx-auto px-4 pb-12">
+            <h1 className="text-white text-4xl md:text-5xl font-bold mb-4">
+              Documents officiels
+            </h1>
+            <p className="text-white/90 text-xl max-w-2xl">
+              Décrets, arrêtés, circulaires, rapports et autres publications administratives du Ministère
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {docs.map((d) => (
-          <CardDocument key={d.href} {...d} />
-        ))}
-      </div>
-    </Section>
+
+      {/* Contenu principal */}
+      <Section className="py-12">
+        <DocumentsClient />
+      </Section>
+    </>
   );
 }

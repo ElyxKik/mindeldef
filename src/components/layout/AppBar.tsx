@@ -67,32 +67,18 @@ export default function AppBar() {
         </Link>
         
         {/* Menu desktop */}
-        <nav className="hidden md:flex gap-6 text-sm">
+        <nav className="hidden md:flex items-center gap-6 text-sm">
           {navLinks.map((link) => (
-            <div key={link.href} className="relative">
+            <div key={link.href} className="relative flex items-center h-16">
               {link.subMenu ? (
                 <>
                   <button 
                     onClick={() => handleSubmenuToggle(link.label)}
-                    className="flex items-center gap-1 py-1 focus:outline-none"
+                    className="h-full flex items-center focus:outline-none hover:text-[var(--color-primary)] transition-colors"
                     aria-expanded={activeSubmenu === link.label}
                     aria-haspopup="true"
                   >
                     {link.label}
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="16" 
-                      height="16" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                      className={`transition-transform duration-200 ${activeSubmenu === link.label ? 'rotate-180' : ''}`}
-                    >
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
                   </button>
                   
                   <AnimatePresence>
@@ -106,24 +92,115 @@ export default function AppBar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute left-0 top-full mt-1 py-2 bg-white dark:bg-zinc-900 shadow-lg rounded-md border border-zinc-200 dark:border-zinc-800 min-w-48 z-50"
+                        className={link.label === "Ministère" ? 
+                          "absolute left-1/2 transform -translate-x-1/2 top-full mt-1 bg-white dark:bg-zinc-900 shadow-xl rounded-lg border border-zinc-200 dark:border-zinc-800 w-[600px] z-50" :
+                          "absolute left-0 top-full mt-1 py-2 bg-white dark:bg-zinc-900 shadow-lg rounded-md border border-zinc-200 dark:border-zinc-800 min-w-48 z-50"
+                        }
                       >
-                        {link.subMenu.map((subItem) => (
-                          <Link 
-                            key={subItem.href} 
-                            href={subItem.href}
-                            className="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                            onClick={() => setActiveSubmenu(null)}
-                          >
-                            {subItem.label}
-                          </Link>
-                        ))}
+                        {link.label === "Ministère" ? (
+                          // Mega menu pour "Ministère"
+                          <div className="p-6">
+                            <div className="mb-4">
+                              <h3 className="text-lg font-semibold text-[var(--color-primary)] mb-2">Le Ministère</h3>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                Découvrez l'organisation, les missions et les responsabilités du Ministère délégué à la Défense
+                              </p>
+                            </div>
+                            <div className="grid grid-cols-2 gap-6">
+                              <div>
+                                <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Organisation</h4>
+                                <div className="space-y-2">
+                                  <Link 
+                                    href="/ministere/ministre"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    onClick={() => setActiveSubmenu(null)}
+                                  >
+                                    <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
+                                      <svg className="w-4 h-4 text-[var(--color-primary)]" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                      </svg>
+                                    </div>
+                                    <div>
+                                      <div className="font-medium text-sm group-hover:text-[var(--color-primary)]">Le Ministre</div>
+                                      <div className="text-xs text-gray-500">Biographie et agenda</div>
+                                    </div>
+                                  </Link>
+                                  <Link 
+                                    href="/ministere/organigramme"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    onClick={() => setActiveSubmenu(null)}
+                                  >
+                                    <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
+                                      <svg className="w-4 h-4 text-[var(--color-primary)]" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" clipRule="evenodd" />
+                                      </svg>
+                                    </div>
+                                    <div>
+                                      <div className="font-medium text-sm group-hover:text-[var(--color-primary)]">Organigramme</div>
+                                      <div className="text-xs text-gray-500">Structure organisationnelle</div>
+                                    </div>
+                                  </Link>
+                                </div>
+                              </div>
+                              <div>
+                                <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Missions & Attributions</h4>
+                                <div className="space-y-2">
+                                  <Link 
+                                    href="/ministere/missions"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    onClick={() => setActiveSubmenu(null)}
+                                  >
+                                    <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
+                                      <svg className="w-4 h-4 text-[var(--color-primary)]" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                                      </svg>
+                                    </div>
+                                    <div>
+                                      <div className="font-medium text-sm group-hover:text-[var(--color-primary)]">Missions</div>
+                                      <div className="text-xs text-gray-500">Objectifs et responsabilités</div>
+                                    </div>
+                                  </Link>
+                                  <Link 
+                                    href="/ministere/attributions"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    onClick={() => setActiveSubmenu(null)}
+                                  >
+                                    <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
+                                      <svg className="w-4 h-4 text-[var(--color-primary)]" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" clipRule="evenodd" />
+                                        <path fillRule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 3a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                                      </svg>
+                                    </div>
+                                    <div>
+                                      <div className="font-medium text-sm group-hover:text-[var(--color-primary)]">Attributions</div>
+                                      <div className="text-xs text-gray-500">Compétences légales</div>
+                                    </div>
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          // Menu classique pour les autres éléments
+                          <div className="py-2">
+                            {link.subMenu.map((subItem) => (
+                              <Link 
+                                key={subItem.href} 
+                                href={subItem.href}
+                                className="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                                onClick={() => setActiveSubmenu(null)}
+                              >
+                                {subItem.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </>
               ) : (
-                <Link href={link.href} className="py-1">
+                <Link href={link.href} className="h-full flex items-center hover:text-[var(--color-primary)] transition-colors">
                   {link.label}
                 </Link>
               )}
@@ -179,24 +256,10 @@ export default function AppBar() {
                     <div>
                       <button 
                         onClick={() => handleSubmenuToggle(link.label)}
-                        className="flex items-center justify-between w-full py-3"
+                        className="w-full py-3 text-left hover:text-[var(--color-primary)] transition-colors"
                         aria-expanded={activeSubmenu === link.label}
                       >
                         <span>{link.label}</span>
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="16" 
-                          height="16" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round"
-                          className={`transition-transform duration-200 ${activeSubmenu === link.label ? 'rotate-180' : ''}`}
-                        >
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
                       </button>
                       
                       <AnimatePresence>

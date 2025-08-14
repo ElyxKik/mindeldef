@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -39,6 +40,7 @@ const navLinks: NavLink[] = [
 ];
 
 export default function AppBar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const submenuRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -75,7 +77,7 @@ export default function AppBar() {
                 <>
                   <button 
                     onClick={() => handleSubmenuToggle(link.label)}
-                    className="h-full flex items-center focus:outline-none hover:text-[var(--color-primary)] transition-colors"
+                    className={`h-full flex items-center focus:outline-none transition-colors ${pathname.startsWith(link.href) ? 'font-bold text-[var(--color-primary)]' : ''} hover:text-[var(--color-primary)] hover:font-bold`}
                     aria-expanded={activeSubmenu === link.label}
                     aria-haspopup="true"
                   >
@@ -203,7 +205,7 @@ export default function AppBar() {
                               <Link 
                                 key={subItem.href} 
                                 href={subItem.href}
-                                className="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                                className={`block px-4 py-2 transition-colors ${pathname === subItem.href ? 'font-bold text-[var(--color-primary)]' : ''} hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:font-bold hover:text-[var(--color-primary)]`}
                                 onClick={() => setActiveSubmenu(null)}
                               >
                                 {subItem.label}
@@ -216,7 +218,10 @@ export default function AppBar() {
                   </AnimatePresence>
                 </>
               ) : (
-                <Link href={link.href} className="h-full flex items-center hover:text-[var(--color-primary)] transition-colors">
+                <Link 
+                  href={link.href} 
+                  className={`h-full flex items-center transition-colors ${pathname === link.href ? 'font-bold text-[var(--color-primary)]' : ''} hover:text-[var(--color-primary)] hover:font-bold`}
+                >
                   {link.label}
                 </Link>
               )}
@@ -272,7 +277,7 @@ export default function AppBar() {
                     <div>
                       <button 
                         onClick={() => handleSubmenuToggle(link.label)}
-                        className="w-full py-3 text-left hover:text-[var(--color-primary)] transition-colors"
+                        className={`w-full py-3 text-left transition-colors ${pathname.startsWith(link.href) ? 'font-bold text-[var(--color-primary)]' : ''} hover:text-[var(--color-primary)] hover:font-bold`}
                         aria-expanded={activeSubmenu === link.label}
                       >
                         <span>{link.label}</span>
@@ -291,7 +296,7 @@ export default function AppBar() {
                               <Link 
                                 key={subItem.href} 
                                 href={subItem.href}
-                                className="block py-2 pl-2 border-l-2 border-zinc-200 dark:border-zinc-700"
+                                className={`block py-2 pl-2 border-l-2 border-zinc-200 dark:border-zinc-700 transition-colors ${pathname === subItem.href ? 'font-bold text-[var(--color-primary)]' : ''} hover:text-[var(--color-primary)] hover:font-bold`}
                                 onClick={() => setIsOpen(false)}
                               >
                                 {subItem.label}

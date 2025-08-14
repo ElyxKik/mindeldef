@@ -21,6 +21,7 @@ const navLinks: NavLink[] = [
     label: "Ministère",
     subMenu: [
       { href: "/ministere/ministre", label: "Le Ministre" },
+      { href: "/ministere/cabinet", label: "Le Cabinet" },
       { href: "/ministere/missions", label: "Missions" },
       { href: "/ministere/attributions", label: "Attributions" },
       { href: "/ministere/organigramme", label: "Organigramme" },
@@ -123,6 +124,21 @@ export default function AppBar() {
                                     <div>
                                       <div className="font-medium text-sm group-hover:text-[var(--color-primary)]">Le Ministre</div>
                                       <div className="text-xs text-gray-500">Biographie et agenda</div>
+                                    </div>
+                                  </Link>
+                                  <Link 
+                                    href="/ministere/cabinet"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    onClick={() => setActiveSubmenu(null)}
+                                  >
+                                    <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
+                                      <svg className="w-4 h-4 text-[var(--color-primary)]" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" clipRule="evenodd" />
+                                      </svg>
+                                    </div>
+                                    <div>
+                                      <div className="font-medium text-sm group-hover:text-[var(--color-primary)]">Le Cabinet</div>
+                                      <div className="text-xs text-gray-500">Équipe ministérielle</div>
                                     </div>
                                   </Link>
                                   <Link 

@@ -1,55 +1,48 @@
-"use client";
-import { useEffect, useState } from "react";
+import Section from "@/components/common/Section";
+import Image from "next/image";
+import { Metadata } from "next";
+import RechercheClient from "./RechercheClient";
 
-type Hit = { _index?: string; id?: string | number; title?: string; slug?: string; summary?: string };
+export const metadata: Metadata = {
+  title: "Recherche | Ministère délégué à la Défense",
+  description: "Recherchez des informations, actualités, documents et programmes du Ministère délégué à la Défense.",
+  openGraph: {
+    title: "Recherche | Ministère délégué à la Défense",
+    description: "Recherchez des informations, actualités, documents et programmes du Ministère délégué à la Défense.",
+    images: ['/images/placeholder-recherche-hero.jpg'],
+  },
+};
 
 export default function Page() {
-  const [q, setQ] = useState("");
-  const [hits, setHits] = useState<Hit[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  async function runSearch(query: string) {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-      const data = await res.json();
-      setHits(data.hits || []);
-    } catch (e) {
-      setHits([]);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    const t = setTimeout(() => {
-      if (q.trim().length > 1) runSearch(q);
-      else setHits([]);
-    }, 300);
-    return () => clearTimeout(t);
-  }, [q]);
-
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight">Recherche</h1>
-      <input
-        className="mt-4 w-full border rounded px-3 py-2"
-        placeholder="Rechercher actualités, documents, pages..."
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-      />
-      {loading ? <p className="mt-4 text-sm text-zinc-500">Recherche...</p> : null}
-      <ul className="mt-6 divide-y divide-zinc-200 dark:divide-zinc-800">
-        {hits.map((h, i) => (
-          <li key={i} className="py-3">
-            <div className="text-xs text-zinc-500">{h._index}</div>
-            <div className="font-medium">{h.title || h.slug || h.id}</div>
-            {h.summary ? (
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">{h.summary}</p>
-            ) : null}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      {/* Hero section avec image Recherche */}
+      <div className="relative h-[40vh] min-h-[320px] max-h-[480px] w-full overflow-hidden">
+        <div className="absolute inset-0 bg-[var(--color-primary)]/90 z-10" />
+        <Image
+          src="/images/placeholder-recherche-hero.jpg"
+          alt="Recherche sur le site du Ministère délégué à la Défense"
+          fill
+          priority
+          className="object-cover object-center opacity-40"
+          sizes="100vw"
+        />
+        <div className="relative z-20 h-full flex flex-col justify-end">
+          <div className="container mx-auto px-4 pb-12">
+            <h1 className="text-white text-4xl md:text-5xl font-bold mb-4">
+              Recherche
+            </h1>
+            <p className="text-white/90 text-xl max-w-2xl">
+              Trouvez rapidement des informations, actualités, documents et programmes du Ministère
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Contenu principal */}
+      <Section className="py-12">
+        <RechercheClient />
+      </Section>
+    </>
   );
 }

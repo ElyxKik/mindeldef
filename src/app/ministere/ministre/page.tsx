@@ -37,57 +37,37 @@ export default function Page() {
       <Section>
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Colonne de gauche - Informations personnelles */}
-            <div className="lg:col-span-1">
-              <div className="bg-zinc-50 dark:bg-zinc-900 p-6 rounded-lg border border-zinc-200 dark:border-zinc-800">
-                <h2 className="text-xl font-semibold mb-4 text-[var(--color-primary)]">Informations</h2>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-medium text-sm text-zinc-500 dark:text-zinc-400">Nomination</h3>
-                    <p>Décret présidentiel n° XX/XX du XX/XX/20XX</p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-medium text-sm text-zinc-500 dark:text-zinc-400">Formation</h3>
-                    <p>Doctorat en Relations Internationales</p>
-                    <p>Master en Administration Publique</p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-medium text-sm text-zinc-500 dark:text-zinc-400">Contact</h3>
-                    <p>cabinet.ministre@defense.gouv.cd</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Réseaux sociaux */}
-              <div className="mt-6 bg-zinc-50 dark:bg-zinc-900 p-6 rounded-lg border border-zinc-200 dark:border-zinc-800">
-                <h2 className="text-xl font-semibold mb-4 text-[var(--color-primary)]">Réseaux sociaux</h2>
-                <div className="flex space-x-4">
-                  <a href="#" className="p-2 rounded-full bg-zinc-200 dark:bg-zinc-800 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
-                    X
-                  </a>
-                  <a href="#" className="p-2 rounded-full bg-zinc-200 dark:bg-zinc-800 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
-                    FB
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            {/* Colonne de droite - Biographie et discours */}
+            {/* Colonne de gauche - Biographie avec photo */}
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-bold mb-6 text-[var(--color-primary)]">Biographie</h2>
               
+              <div className="flex flex-col md:flex-row gap-6 mb-6">
+                {/* Photo du ministre avec cadre */}
+                <div className="md:w-1/3 flex-shrink-0">
+                  <div className="relative rounded-lg overflow-hidden border-4 border-[var(--color-primary)]/20 shadow-lg">
+                    <Image
+                      src="/images/placeholder-minister-portrait.jpg"
+                      alt="Portrait du Ministre délégué à la Défense"
+                      width={300}
+                      height={400}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                </div>
+                
+                {/* Texte de biographie */}
+                <div className="md:w-2/3 prose dark:prose-invert max-w-none">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.
+                  </p>
+                  
+                  <p>
+                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet.
+                  </p>
+                </div>
+              </div>
+              
               <div className="prose dark:prose-invert max-w-none">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.
-                </p>
-                
-                <p>
-                  Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet.
-                </p>
-                
                 <h3>Parcours professionnel</h3>
                 
                 <ul>
@@ -123,6 +103,44 @@ export default function Page() {
                     <h3 className="font-semibold">Intervention au Parlement sur la politique de défense</h3>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400">5 mai 2025</p>
                   </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Colonne de droite - Informations personnelles */}
+            <div className="lg:col-span-1">
+              <div className="bg-zinc-50 dark:bg-zinc-900 p-6 rounded-lg border border-zinc-200 dark:border-zinc-800">
+                <h2 className="text-xl font-semibold mb-4 text-[var(--color-primary)]">Informations</h2>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-medium text-sm text-zinc-500 dark:text-zinc-400">Nomination</h3>
+                    <p>Décret présidentiel n° XX/XX du XX/XX/20XX</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="font-medium text-sm text-zinc-500 dark:text-zinc-400">Formation</h3>
+                    <p>Doctorat en Relations Internationales</p>
+                    <p>Master en Administration Publique</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="font-medium text-sm text-zinc-500 dark:text-zinc-400">Contact</h3>
+                    <p>cabinet.ministre@defense.gouv.cd</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Réseaux sociaux */}
+              <div className="mt-6 bg-zinc-50 dark:bg-zinc-900 p-6 rounded-lg border border-zinc-200 dark:border-zinc-800">
+                <h2 className="text-xl font-semibold mb-4 text-[var(--color-primary)]">Réseaux sociaux</h2>
+                <div className="flex space-x-4">
+                  <a href="#" className="p-2 rounded-full bg-zinc-200 dark:bg-zinc-800 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
+                    X
+                  </a>
+                  <a href="#" className="p-2 rounded-full bg-zinc-200 dark:bg-zinc-800 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
+                    FB
+                  </a>
                 </div>
               </div>
             </div>

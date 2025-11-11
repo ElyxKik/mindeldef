@@ -17,11 +17,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+};
+
 export const metadata: Metadata = {
   title: "Ministère délégué à la Défense — RDC",
   description:
     "Portail officiel: missions, actualités, documents officiels, marchés publics, FARDC, médias.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(getBaseUrl()),
   openGraph: {
     type: "website",
     title: "Ministère délégué à la Défense — RDC",

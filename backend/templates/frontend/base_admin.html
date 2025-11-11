@@ -1,0 +1,155 @@
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Administration | Ministère délégué à la Défense{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Interface d'administration du Ministère délégué à la Défense de la République Démocratique du Congo{% endblock %}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endcompress %}
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="bg-primary text-white w-64 min-h-screen flex flex-col transition-all duration-300 ease-in-out">
+        <div class="p-4 border-b border-blue-800">
+            <div class="flex items-center">
+                <img src="{% static 'images/logo-min-mindeldef.png' %}" alt="Logo Ministère délégué à la Défense" class="py-2" style="height: 84px;">
+            </div>
+        </div>
+        
+        <nav class="flex-grow py-4">
+            <div class="px-4 mb-2 text-xs font-semibold text-blue-200 uppercase tracking-wider">
+                Contenu
+            </div>
+            <a href="{% url 'frontend:index' %}" class="flex items-center px-4 py-3 text-blue-100 hover:bg-blue-800 hover:text-white transition-colors {% if request.path == '/admin/frontend/' %}bg-blue-800 text-white{% endif %}">
+                <i class="fas fa-tachometer-alt w-5 mr-3"></i>
+                <span>Tableau de bord</span>
+            </a>
+            <a href="{% url 'frontend:pages' %}" class="flex items-center px-4 py-3 text-blue-100 hover:bg-blue-800 hover:text-white transition-colors {% if '/pages/' in request.path %}bg-blue-800 text-white{% endif %}">
+                <i class="fas fa-file-alt w-5 mr-3"></i>
+                <span>Pages</span>
+            </a>
+            <a href="{% url 'frontend:articles' %}" class="flex items-center px-4 py-3 text-blue-100 hover:bg-blue-800 hover:text-white transition-colors {% if '/articles/' in request.path %}bg-blue-800 text-white{% endif %}">
+                <i class="fas fa-newspaper w-5 mr-3"></i>
+                <span>Articles</span>
+            </a>
+            <a href="{% url 'frontend:media' %}" class="flex items-center px-4 py-3 text-blue-100 hover:bg-blue-800 hover:text-white transition-colors {% if '/media/' in request.path %}bg-blue-800 text-white{% endif %}">
+                <i class="fas fa-images w-5 mr-3"></i>
+                <span>Médiathèque</span>
+            </a>
+            
+            <div class="px-4 mt-6 mb-2 text-xs font-semibold text-blue-200 uppercase tracking-wider">
+                Configuration
+            </div>
+            <a href="/admin/" class="flex items-center px-4 py-3 text-blue-100 hover:bg-blue-800 hover:text-white transition-colors">
+                <i class="fas fa-cog w-5 mr-3"></i>
+                <span>Administration Django</span>
+            </a>
+            <a href="/admin/logout/" class="flex items-center px-4 py-3 text-blue-100 hover:bg-blue-800 hover:text-white transition-colors">
+                <i class="fas fa-sign-out-alt w-5 mr-3"></i>
+                <span>Déconnexion</span>
+            </a>
+        </nav>
+        
+        <div class="p-4 border-t border-blue-800 text-xs text-blue-200">
+            <p>© 2025 Ministère délégué à la Défense</p>
+        </div>
+    </aside>
+    
+    <!-- Main content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Top header -->
+        <header class="bg-white shadow-sm z-10">
+            <div class="flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <button id="sidebar-toggle" class="text-gray-500 focus:outline-none lg:hidden">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                    <div class="ml-4 lg:ml-0">
+                        <h2 class="text-lg font-medium">{% block page_title %}Tableau de bord{% endblock %}</h2>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notifications-menu-button" class="flex text-gray-500 focus:outline-none">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="user-menu-button" class="flex text-sm rounded-full focus:outline-none">
+                            <span class="sr-only">Menu utilisateur</span>
+                            <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                                {{ request.user.username|first|upper }}
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Messages -->
+        {% if messages %}
+        <div class="px-4 py-2">
+            {% for message in messages %}
+            <div class="mb-2 p-4 rounded-md {% if message.tags == 'success' %}bg-green-100 text-green-800{% elif message.tags == 'error' %}bg-red-100 text-red-800{% elif message.tags == 'warning' %}bg-yellow-100 text-yellow-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Page content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50 p-4">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Toggle sidebar
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+        });
+        
+        // User menu
+        document.getElementById('user-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('user-menu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
+        });
+        
+        // Close alerts
+        document.querySelectorAll('.alert-close').forEach(button => {
+            button.addEventListener('click', () => {
+                button.parentElement.remove();
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

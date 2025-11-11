@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Administration du site{% endblock %}
+
+{% block extra_css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-primary">{{ title }}</h1>
+        <a href="{% url 'frontend:pages' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left mr-2"></i> Retour à la liste
+        </a>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">Des erreurs ont été trouvées dans le formulaire</h3>
+                        <div class="mt-2 text-sm text-red-700">
+                            <ul class="list-disc pl-5 space-y-1">
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                        {% for error in field.errors %}
+                                        <li>{{ field.label }}: {{ error }}</li>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Informations principales -->
+                <div>
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Informations principales</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="{{ form.title.id_for_label }}" class="form-label">Titre <span class="text-red-500">*</span></label>
+                            {{ form.title }}
+                            {% if form.title.help_text %}
+                            <p class="mt-1 text-sm text-gray-500">{{ form.title.help_text }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.slug.id_for_label }}" class="form-label">Slug <span class="text-red-500">*</span></label>
+                            {{ form.slug }}
+                            {% if form.slug.help_text %}
+                            <p class="mt-1 text-sm text-gray-500">{{ form.slug.help_text }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.subtitle.id_for_label }}" class="form-label">Sous-titre</label>
+                            {{ form.subtitle }}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.excerpt.id_for_label }}" class="form-label">Extrait</label>
+                            {{ form.excerpt }}
+                            <p class="mt-1 text-sm text-gray-500">Un court résumé de la page</p>
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.category.id_for_label }}" class="form-label">Catégorie</label>
+                            {{ form.category }}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.parent.id_for_label }}" class="form-label">Page parente</label>
+                            {{ form.parent }}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Images et paramètres -->
+                <div>
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Images et paramètres</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="{{ form.featured_image.id_for_label }}" class="form-label">Image à la une</label>
+                            {% if page.featured_image %}
+                            <div class="mb-2">
+                                <img src="{{ page.featured_image.url }}" alt="{{ page.title }}" class="h-24 object-cover rounded">
+                            </div>
+                            {% endif %}
+                            {{ form.featured_image }}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.banner_image.id_for_label }}" class="form-label">Image de bannière</label>
+                            {% if page.banner_image %}
+                            <div class="mb-2">
+                                <img src="{{ page.banner_image.url }}" alt="{{ page.title }}" class="h-24 object-cover rounded">
+                            </div>
+                            {% endif %}
+                            {{ form.banner_image }}
+                        </div>
+                        
+                        <div class="flex items-center">
+                            {{ form.published }}
+                            <label for="{{ form.published.id_for_label }}" class="ml-2 block text-sm text-gray-900">
+                                Publié
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.published_at.id_for_label }}" class="form-label">Date de publication</label>
+                            {{ form.published_at }}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.language.id_for_label }}" class="form-label">Langue</label>
+                            {{ form.language }}
+                        </div>
+                        
+                        <div class="flex items-center">
+                            {{ form.is_active }}
+                            <label for="{{ form.is_active.id_for_label }}" class="ml-2 block text-sm text-gray-900">
+                                Actif
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menu -->
+            <div class="pt-6 border-t border-gray-200">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Paramètres de menu</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex items-center">
+                        {{ form.show_in_menu }}
+                        <label for="{{ form.show_in_menu.id_for_label }}" class="ml-2 block text-sm text-gray-900">
+                            Afficher dans le menu
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <label for="{{ form.menu_title.id_for_label }}" class="form-label">Titre dans le menu</label>
+                        {{ form.menu_title }}
+                        <p class="mt-1 text-sm text-gray-500">Si différent du titre principal</p>
+                    </div>
+                    
+                    <div>
+                        <label for="{{ form.order.id_for_label }}" class="form-label">Ordre dans le menu</label>
+                        {{ form.order }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SEO -->
+            <div class="pt-6 border-t border-gray-200">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">SEO</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.meta_title.id_for_label }}" class="form-label">Titre méta</label>
+                        {{ form.meta_title }}
+                        <p class="mt-1 text-sm text-gray-500">Laissez vide pour utiliser le titre principal</p>
+                    </div>
+                    
+                    <div>
+                        <label for="{{ form.meta_description.id_for_label }}" class="form-label">Description méta</label>
+                        {{ form.meta_description }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contenu -->
+            <div class="pt-6 border-t border-gray-200">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Contenu</h2>
+                
+                <div>
+                    <label for="{{ form.content.id_for_label }}" class="form-label">Contenu <span class="text-red-500">*</span></label>
+                    {{ form.content }}
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3 pt-6">
+                <a href="{% url 'frontend:pages' %}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">
+                    {% if page %}Mettre à jour{% else %}Créer{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ form.media.js }}
+{% endblock %}

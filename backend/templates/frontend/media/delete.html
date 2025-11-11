@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Supprimer {{ media.title }} | Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="text-center mb-6">
+                <svg class="mx-auto h-16 w-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+                <h1 class="text-2xl font-bold text-gray-900 mt-4">Confirmer la suppression</h1>
+                <p class="text-gray-600 mt-2">Êtes-vous sûr de vouloir supprimer ce média ?</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-md mb-6">
+                <div class="flex items-center">
+                    {% if media.file and media.type == 'image' %}
+                    <div class="flex-shrink-0 mr-4">
+                        <img src="{{ media.file.url }}" alt="{{ media.title }}" class="h-16 w-16 object-cover rounded">
+                    </div>
+                    {% elif media.type == 'video' %}
+                    <div class="flex-shrink-0 mr-4 h-16 w-16 bg-gray-800 rounded flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    {% elif media.type == 'document' %}
+                    <div class="flex-shrink-0 mr-4 h-16 w-16 bg-blue-50 rounded flex items-center justify-center text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    {% elif media.type == 'audio' %}
+                    <div class="flex-shrink-0 mr-4 h-16 w-16 bg-purple-50 rounded flex items-center justify-center text-purple-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                    </div>
+                    {% else %}
+                    <div class="flex-shrink-0 mr-4 h-16 w-16 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    {% endif %}
+                    
+                    <div>
+                        <h2 class="font-bold text-lg text-gray-900">{{ media.title }}</h2>
+                        <p class="text-sm text-gray-500">Type: {{ media.type }}</p>
+                        {% if media.file %}
+                        <p class="text-sm text-gray-500">Fichier: {{ media.file.name|split:"/"|last }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-red-700">
+                            <strong>Attention :</strong> Cette action est irréversible. Le fichier sera définitivement supprimé du serveur.
+                        </p>
+                        <p class="text-sm text-red-700 mt-2">
+                            Si ce média est utilisé dans des pages ou des articles, cela pourrait causer des problèmes d'affichage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="post" class="flex justify-center space-x-4">
+                {% csrf_token %}
+                <a href="{% url 'frontend:media_detail' media.id %}" class="btn btn-secondary">
+                    Annuler
+                </a>
+                <button type="submit" class="btn btn-danger">
+                    Confirmer la suppression
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

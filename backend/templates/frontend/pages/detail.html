@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} | Administration du site{% endblock %}
+{% block meta_description %}{{ page.meta_description }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- En-tête avec actions -->
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-primary">{{ page.title }}</h1>
+            {% if page.subtitle %}
+            <p class="text-xl text-gray-600 mt-2">{{ page.subtitle }}</p>
+            {% endif %}
+        </div>
+        <div class="flex space-x-3 mt-4 md:mt-0">
+            <a href="{% url 'frontend:page_edit' page.slug %}" class="btn btn-primary">
+                <i class="fas fa-edit mr-2"></i> Modifier
+            </a>
+            <a href="{% url 'frontend:page_delete' page.slug %}" class="btn btn-danger">
+                <i class="fas fa-trash mr-2"></i> Supprimer
+            </a>
+            <a href="{% url 'frontend:pages' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left mr-2"></i> Retour
+            </a>
+        </div>
+    </div>
+
+    <!-- Informations et prévisualisation -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Informations sur la page -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2">Informations</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Statut</h3>
+                        <div class="mt-1">
+                            {% if page.published %}
+                            <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Publié
+                            </span>
+                            {% else %}
+                            <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                Brouillon
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Catégorie</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ page.category.name|default:"Non catégorisé" }}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Slug</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ page.slug }}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Date de création</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ page.created_at|date:"d/m/Y H:i" }}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Dernière mise à jour</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ page.updated_at|date:"d/m/Y H:i" }}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Date de publication</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ page.published_at|date:"d/m/Y H:i"|default:"Non définie" }}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Langue</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ page.get_language_display }}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Affichage dans le menu</h3>
+                        <p class="mt-1 text-sm text-gray-900">
+                            {% if page.show_in_menu %}
+                            Oui{% if page.menu_title %} ({{ page.menu_title }}){% endif %}
+                            {% else %}
+                            Non
+                            {% endif %}
+                        </p>
+                    </div>
+                    
+                    {% if page.parent %}
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500">Page parente</h3>
+                        <p class="mt-1 text-sm text-gray-900">
+                            <a href="{% url 'frontend:page_detail' page.parent.slug %}" class="text-blue-600 hover:underline">
+                                {{ page.parent.title }}
+                            </a>
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contenu de la page -->
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2">Prévisualisation</h2>
+                
+                <!-- Images -->
+                {% if page.featured_image or page.banner_image %}
+                <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% if page.featured_image %}
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-2">Image à la une</h3>
+                        <img src="{{ page.featured_image.url }}" alt="{{ page.title }}" class="rounded-lg shadow-sm max-h-48 object-cover">
+                    </div>
+                    {% endif %}
+                    
+                    {% if page.banner_image %}
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-2">Image de bannière</h3>
+                        <img src="{{ page.banner_image.url }}" alt="{{ page.title }}" class="rounded-lg shadow-sm max-h-48 object-cover">
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                <!-- Extrait -->
+                {% if page.excerpt %}
+                <div class="mb-6">
+                    <h3 class="text-sm font-medium text-gray-500 mb-2">Extrait</h3>
+                    <div class="bg-gray-50 p-4 rounded-md text-gray-700 italic">
+                        {{ page.excerpt }}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Contenu principal -->
+                <div class="prose max-w-none">
+                    {{ page.content|safe }}
+                </div>
+                
+                <!-- SEO -->
+                <div class="mt-8 pt-6 border-t">
+                    <h3 class="text-lg font-medium text-gray-700 mb-3">Informations SEO</h3>
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <div class="mb-3">
+                            <h4 class="text-sm font-medium text-gray-500">Titre méta</h4>
+                            <p class="text-sm text-gray-900">{{ page.meta_title|default:page.title }}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500">Description méta</h4>
+                            <p class="text-sm text-gray-900">{{ page.meta_description|default:"Aucune description méta définie" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-primary">{{ title }}</h1>
+        <a href="{% url 'frontend:media' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left mr-2"></i> Retour à la médiathèque
+        </a>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">Des erreurs ont été trouvées dans le formulaire</h3>
+                        <div class="mt-2 text-sm text-red-700">
+                            <ul class="list-disc pl-5 space-y-1">
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                        {% for error in field.errors %}
+                                        <li>{{ field.label }}: {{ error }}</li>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Informations principales -->
+                <div>
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Informations principales</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="{{ form.title.id_for_label }}" class="form-label">Titre <span class="text-red-500">*</span></label>
+                            {{ form.title }}
+                            {% if form.title.help_text %}
+                            <p class="mt-1 text-sm text-gray-500">{{ form.title.help_text }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.type.id_for_label }}" class="form-label">Type <span class="text-red-500">*</span></label>
+                            {{ form.type }}
+                            {% if form.type.help_text %}
+                            <p class="mt-1 text-sm text-gray-500">{{ form.type.help_text }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.file.id_for_label }}" class="form-label">Fichier {% if not media %}
+                            <span class="text-red-500">*</span>{% endif %}</label>
+                            {% if media.file %}
+                            <div class="mb-2">
+                                {% if media.type == 'image' %}
+                                <img src="{{ media.file.url }}" alt="{{ media.title }}" class="h-24 object-cover rounded">
+                                {% else %}
+                                <div class="text-sm text-gray-500">
+                                    Fichier actuel: {{ media.file.name|split:"/"|last }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            {{ form.file }}
+                            {% if media %}
+                            <p class="mt-1 text-sm text-gray-500">Laissez vide pour conserver le fichier actuel</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                            {{ form.description }}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Métadonnées -->
+                <div>
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Métadonnées</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="{{ form.alt_text.id_for_label }}" class="form-label">Texte alternatif</label>
+                            {{ form.alt_text }}
+                            <p class="mt-1 text-sm text-gray-500">Description pour les lecteurs d'écran et le référencement</p>
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.caption.id_for_label }}" class="form-label">Légende</label>
+                            {{ form.caption }}
+                            <p class="mt-1 text-sm text-gray-500">Texte affiché sous l'image</p>
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.tags.id_for_label }}" class="form-label">Tags</label>
+                            {{ form.tags }}
+                            <p class="mt-1 text-sm text-gray-500">Séparez les tags par des espaces</p>
+                        </div>
+                        
+                        <div>
+                            <label for="{{ form.copyright.id_for_label }}" class="form-label">Copyright</label>
+                            {{ form.copyright }}
+                            <p class="mt-1 text-sm text-gray-500">Informations sur les droits d'auteur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3 pt-6">
+                <a href="{% url 'frontend:media' %}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">
+                    {% if media %}Mettre à jour{% else %}Ajouter{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

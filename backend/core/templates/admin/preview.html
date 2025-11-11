@@ -1,0 +1,133 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+<style>
+    .preview-container {
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+    
+    .preview-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .preview-title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .preview-meta {
+        margin-bottom: 20px;
+        color: #666;
+        font-size: 14px;
+    }
+    
+    .preview-content {
+        line-height: 1.6;
+    }
+    
+    .preview-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    .preview-actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .preview-actions a {
+        padding: 10px 15px;
+        background-color: #79aec8;
+        color: #fff;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+    
+    .preview-actions a.secondary {
+        background-color: #f8f8f8;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+    
+    .preview-frame {
+        width: 100%;
+        height: 800px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .device-selector {
+        margin-bottom: 20px;
+    }
+    
+    .device-selector button {
+        padding: 8px 12px;
+        margin-right: 10px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .device-selector button.active {
+        background-color: #79aec8;
+        color: #fff;
+        border-color: #79aec8;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="preview-container">
+    <div class="preview-header">
+        <div class="preview-title">{{ title }}</div>
+        <div class="device-selector">
+            <button class="device-button active" data-width="100%" data-height="800px">Bureau</button>
+            <button class="device-button" data-width="768px" data-height="1024px">Tablette</button>
+            <button class="device-button" data-width="375px" data-height="667px">Mobile</button>
+        </div>
+    </div>
+    
+    <div class="preview-meta">
+        <p>{% trans "Prévisualisation" %} | {{ object_type }} | ID: {{ object_id }}</p>
+    </div>
+    
+    <iframe id="preview-frame" class="preview-frame" src="{{ preview_url }}" frameborder="0"></iframe>
+    
+    <div class="preview-actions">
+        <a href="{{ edit_url }}" class="secondary">{% trans "Modifier" %}</a>
+        <a href="{{ list_url }}">{% trans "Retour à la liste" %}</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const frame = document.getElementById('preview-frame');
+        const buttons = document.querySelectorAll('.device-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Mettre à jour la classe active
+                buttons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Changer les dimensions de l'iframe
+                frame.style.width = this.dataset.width;
+                frame.style.height = this.dataset.height;
+            });
+        });
+    });
+</script>
+{% endblock %}

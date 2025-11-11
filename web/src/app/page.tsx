@@ -40,11 +40,11 @@ export default function Home() {
       />
       
       {/* Mission Statement Section */}
-      <Section className="bg-slate-50 dark:bg-slate-800 py-12">
+      <Section className="bg-slate-50 py-12 mt-[20px]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">Notre Mission</h2>
-          <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-            Le Ministère délégué à la Défense œuvre pour la protection et la sécurité du territoire national, le renforcement des capacités opérationnelles des Forces Armées Congolaises (FARDC), et la promotion d'une défense moderne, professionnelle et respectueuse des droits humains.
+          <h2 className="text-3xl font-bold mb-4 text-slate-900">Notre Mission</h2>
+          <p className="text-lg text-slate-700 leading-relaxed">
+            Le Ministère délégué à la Défense et des Anciens Combattants œuvre pour la protection et la sécurité du territoire national, le renforcement des capacités opérationnelles des Forces Armées Congolaises (FARDC), la promotion d'une défense moderne, professionnelle et respectueuse des droits humains, ainsi que pour le soutien et la reconnaissance des anciens combattants.
           </p>
         </div>
       </Section>
@@ -54,19 +54,19 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">
             <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">250K+</div>
-            <p className="text-slate-600 dark:text-slate-300">Militaires actifs</p>
+            <p className="text-slate-700">Militaires actifs</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">80K+</div>
-            <p className="text-slate-600 dark:text-slate-300">Anciens combattants</p>
+            <p className="text-slate-700">Anciens combattants</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">26</div>
-            <p className="text-slate-600 dark:text-slate-300">Provinces couvertes</p>
+            <p className="text-slate-700">Provinces couvertes</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">60+</div>
-            <p className="text-slate-600 dark:text-slate-300">Ans de service</p>
+            <p className="text-slate-700">Ans de service</p>
           </div>
         </div>
       </Section>
@@ -85,8 +85,8 @@ export default function Home() {
             />
           </div>
           <div>
-            <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">Le Ministre délégué</h2>
-            <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+            <h2 className="text-3xl font-bold mb-4 text-slate-900">Le Ministre délégué</h2>
+            <p className="text-slate-700 mb-6 leading-relaxed">
               À la tête du ministère, le Ministre délégué à la Défense dirige les politiques de sécurité nationale et de défense. Il assure la coordination entre les différentes branches des Forces Armées Congolaises et met en œuvre les priorités stratégiques du gouvernement en matière de sécurité.
             </p>
             <a

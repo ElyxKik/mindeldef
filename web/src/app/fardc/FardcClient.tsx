@@ -21,7 +21,7 @@ const TabButton = ({
     className={`px-4 py-2 font-medium text-sm rounded-md transition-all duration-300 ${
       active 
         ? "bg-[var(--color-primary)] text-white shadow-md" 
-        : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
     }`}
   >
     {children}
@@ -45,7 +45,7 @@ const OperationCard = ({
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
-    className="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow"
+    className="border border-slate-200 rounded-lg p-5 bg-white shadow-sm hover:shadow-md transition-shadow"
   >
     <div className="flex items-center justify-between mb-3">
       <h3 className="text-lg font-semibold text-[var(--color-primary)]">{title}</h3>
@@ -53,10 +53,10 @@ const OperationCard = ({
         {date}
       </span>
     </div>
-    <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+    <p className="text-sm text-slate-700 mb-2">
       <span className="font-medium">Lieu:</span> {location}
     </p>
-    <p className="text-sm text-gray-600 dark:text-gray-300">{description}</p>
+    <p className="text-sm text-slate-700">{description}</p>
   </motion.div>
 );
 
@@ -77,7 +77,7 @@ const DefenseZoneCard = ({
     whileInView={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
-    className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all"
+    className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-all"
   >
     <div className="bg-[var(--color-primary)] p-4">
       <h3 className="text-lg font-semibold text-white">{name}</h3>
@@ -123,7 +123,7 @@ const RecruitmentStep = ({
     </div>
     <div>
       <h3 className="text-lg font-medium mb-1">{title}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-300">{description}</p>
+      <p className="text-sm text-slate-700">{description}</p>
     </div>
   </motion.div>
 );
@@ -202,7 +202,7 @@ export default function FardcClient() {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="prose max-w-none">
               <h2 className="text-2xl font-bold mb-4">Les Forces Armées de la République Démocratique du Congo</h2>
               
               <p>
@@ -211,7 +211,7 @@ export default function FardcClient() {
                 extérieures et d'assurer la protection des personnes et de leurs biens.
               </p>
               
-              <div className="my-6 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border-l-4 border-[var(--color-primary)]">
+              <div className="my-6 bg-slate-50 p-6 rounded-lg border-l-4 border-[var(--color-primary)]">
                 <h3 className="text-xl font-semibold mb-3">Mission</h3>
                 <p>
                   Les FARDC ont pour mission principale de garantir l'indépendance et l'intégrité territoriale de la 
@@ -291,7 +291,7 @@ export default function FardcClient() {
               />
             </div>
             
-            <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <div className="mt-8 p-4 bg-slate-50 rounded-lg">
               <h3 className="text-xl font-semibold mb-3">Résultats des opérations récentes</h3>
               <ul className="list-disc pl-5 space-y-2">
                 <li>Neutralisation de plusieurs chefs rebelles</li>
@@ -439,13 +439,13 @@ export default function FardcClient() {
               />
             </div>
             
-            <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
               <h3 className="text-xl font-semibold mb-3">Formations et spécialités</h3>
               <p className="mb-4">
                 Les FARDC offrent diverses filières de formation et de spécialisation pour les nouvelles recrues :
               </p>
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="p-3 bg-white dark:bg-gray-700 rounded shadow-sm">
+                <div className="p-3 bg-white rounded shadow-sm">
                   <h4 className="font-medium mb-2">Formations militaires</h4>
                   <ul className="list-disc pl-5 text-sm">
                     <li>Infanterie</li>
@@ -455,7 +455,7 @@ export default function FardcClient() {
                     <li>Transmissions</li>
                   </ul>
                 </div>
-                <div className="p-3 bg-white dark:bg-gray-700 rounded shadow-sm">
+                <div className="p-3 bg-white rounded shadow-sm">
                   <h4 className="font-medium mb-2">Formations techniques</h4>
                   <ul className="list-disc pl-5 text-sm">
                     <li>Maintenance aéronautique</li>

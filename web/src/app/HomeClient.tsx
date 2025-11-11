@@ -144,7 +144,7 @@ const CircularIcon = () => (
 const QuickAccessCard = ({ title, href, icon }: { title: string; href: string; icon: React.ReactNode }) => (
   <a 
     href={href} 
-    className="flex flex-col items-center justify-center rounded-lg border border-gray-200 p-6 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white dark:bg-gray-800 dark:border-gray-700"
+    className="flex flex-col items-center justify-center rounded-lg border border-gray-200 p-6 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white"
   >
     {icon}
     <h3 className="text-lg font-medium">{title}</h3>
@@ -155,11 +155,11 @@ const QuickAccessCard = ({ title, href, icon }: { title: string; href: string; i
 const EventCard = ({ title, date, location, href }: { title: string; date: string; location: string; href: string }) => (
   <a 
     href={href} 
-    className="flex flex-col p-4 rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-md hover:-translate-y-1 bg-white dark:bg-gray-800 dark:border-gray-700"
+    className="flex flex-col p-4 rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-md hover:-translate-y-1 bg-white"
   >
     <time className="text-sm font-medium text-[var(--color-primary)]">{date}</time>
     <h3 className="mt-2 text-lg font-medium">{title}</h3>
-    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{location}</p>
+    <p className="mt-1 text-sm text-gray-600">{location}</p>
   </a>
 );
 
@@ -193,35 +193,35 @@ export default function HomeClient() {
 
       {/* Section Priorités Stratégiques */}
       <AnimatedSection className="mb-16" delay={0.1}>
-        <h2 className="text-3xl font-bold mb-8 text-slate-900 dark:text-white">Priorités Stratégiques</h2>
+        <h2 className="text-3xl font-bold mb-8 text-slate-900">Priorités Stratégiques</h2>
         <StaggeredItems className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-lg p-6 border border-blue-200 dark:border-blue-700">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
             <div className="flex items-center mb-3">
               <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">1</div>
-              <h3 className="ml-3 text-lg font-semibold text-slate-900 dark:text-white">Sécurité territoriale</h3>
+              <h3 className="ml-3 text-lg font-semibold text-slate-900">Sécurité territoriale</h3>
             </div>
-            <p className="text-slate-700 dark:text-slate-300">Protection intégrale du territoire national contre les menaces internes et externes.</p>
+            <p className="text-slate-700">Protection intégrale du territoire national contre les menaces internes et externes.</p>
           </div>
-          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900 dark:to-emerald-800 rounded-lg p-6 border border-emerald-200 dark:border-emerald-700">
+          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-6 border border-emerald-200">
             <div className="flex items-center mb-3">
               <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold">2</div>
-              <h3 className="ml-3 text-lg font-semibold text-slate-900 dark:text-white">Modernisation FARDC</h3>
+              <h3 className="ml-3 text-lg font-semibold text-slate-900">Modernisation FARDC</h3>
             </div>
-            <p className="text-slate-700 dark:text-slate-300">Renforcement des capacités opérationnelles et technologiques des Forces Armées.</p>
+            <p className="text-slate-700">Renforcement des capacités opérationnelles et technologiques des Forces Armées.</p>
           </div>
-          <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900 dark:to-amber-800 rounded-lg p-6 border border-amber-200 dark:border-amber-700">
+          <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg p-6 border border-amber-200">
             <div className="flex items-center mb-3">
               <div className="w-10 h-10 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold">3</div>
-              <h3 className="ml-3 text-lg font-semibold text-slate-900 dark:text-white">Coopération régionale</h3>
+              <h3 className="ml-3 text-lg font-semibold text-slate-900">Coopération régionale</h3>
             </div>
-            <p className="text-slate-700 dark:text-slate-300">Renforcement des partenariats de défense et de sécurité avec les pays voisins.</p>
+            <p className="text-slate-700">Renforcement des partenariats de défense et de sécurité avec les pays voisins.</p>
           </div>
         </StaggeredItems>
       </AnimatedSection>
 
       {/* Section Accès Rapides */}
       <AnimatedSection className="mb-16" delay={0.2}>
-        <h2 className="text-3xl font-bold mb-8 text-slate-900 dark:text-white">Accès Rapides</h2>
+        <h2 className="text-3xl font-bold mb-8 text-slate-900">Accès Rapides</h2>
         <StaggeredItems className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           <QuickAccessCard title="Documents officiels" href="/documents" icon={<DocumentIcon />} />
           <QuickAccessCard title="Marchés publics" href="/marches-publics" icon={<ContractIcon />} />
@@ -315,10 +315,10 @@ export default function HomeClient() {
       {/* Section Agenda du Ministre */}
       <AnimatedSection className="mb-16" delay={0.5}>
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Agenda du Ministre</h2>
+          <h2 className="text-3xl font-bold text-slate-900">Agenda du Ministre</h2>
           <a 
             href="/ministere/ministre/agenda" 
-            className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center group font-semibold"
+            className="text-[var(--color-primary)] hover:underline inline-flex items-center group font-semibold"
           >
             Voir l'agenda complet
             <svg xmlns="http://www.w3.org/2000/svg" className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">

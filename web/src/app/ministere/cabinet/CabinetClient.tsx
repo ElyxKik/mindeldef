@@ -109,7 +109,7 @@ export default function CabinetClient() {
       {/* Introduction */}
       <div className="max-w-3xl mx-auto mb-12 text-center">
         <h2 className="text-3xl font-bold mb-4 text-[var(--color-primary)]">Le Cabinet du Ministre</h2>
-        <p className="text-lg text-zinc-700 dark:text-zinc-300">
+        <p className="text-lg text-slate-700">
           Le cabinet du Ministre délégué à la Défense est composé d'experts et de conseillers spécialisés qui accompagnent le Ministre dans l'élaboration et la mise en œuvre de la politique de défense nationale.
         </p>
       </div>
@@ -119,7 +119,7 @@ export default function CabinetClient() {
         {cabinetMembers.map((member) => (
           <motion.div
             key={member.id}
-            className="bg-white dark:bg-zinc-800 rounded-lg overflow-hidden shadow-md border border-zinc-200 dark:border-zinc-700 hover:shadow-lg transition-shadow cursor-pointer"
+            className="bg-white rounded-lg overflow-hidden shadow-md border border-slate-200 hover:shadow-lg transition-shadow cursor-pointer"
             whileHover={{ y: -5 }}
             onClick={() => handleMemberClick(member)}
           >
@@ -135,23 +135,23 @@ export default function CabinetClient() {
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
               <p className="text-[var(--color-primary)] font-medium mb-3">{member.role}</p>
-              <p className="text-zinc-600 dark:text-zinc-300 line-clamp-3">{member.bio}</p>
+              <p className="text-slate-700 line-clamp-3">{member.bio}</p>
               
               {/* Icônes réseaux sociaux */}
               {member.socialLinks && (
                 <div className="mt-4 flex space-x-3">
                   {member.socialLinks.twitter && (
-                    <a href={member.socialLinks.twitter} className="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
+                    <a href={member.socialLinks.twitter} className="text-slate-600 hover:text-[var(--color-primary)] transition-colors">
                       <FaTwitter size={18} />
                     </a>
                   )}
                   {member.socialLinks.linkedin && (
-                    <a href={member.socialLinks.linkedin} className="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
+                    <a href={member.socialLinks.linkedin} className="text-slate-600 hover:text-[var(--color-primary)] transition-colors">
                       <FaLinkedin size={18} />
                     </a>
                   )}
                   {member.socialLinks.email && (
-                    <a href={`mailto:${member.socialLinks.email}`} className="text-zinc-500 hover:text-[var(--color-primary)] transition-colors">
+                    <a href={`mailto:${member.socialLinks.email}`} className="text-slate-600 hover:text-[var(--color-primary)] transition-colors">
                       <FaEnvelope size={18} />
                     </a>
                   )}
@@ -169,12 +169,12 @@ export default function CabinetClient() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-white dark:bg-zinc-900 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
           >
             <div className="relative">
               <button 
                 onClick={handleCloseModal}
-                className="absolute top-4 right-4 z-10 bg-white/80 dark:bg-zinc-800/80 rounded-full p-2 text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors"
+                className="absolute top-4 right-4 z-10 bg-white/80 rounded-full p-2 text-slate-700 hover:text-[var(--color-primary)] transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -197,26 +197,26 @@ export default function CabinetClient() {
                   <h3 className="text-2xl font-bold mb-1">{selectedMember.name}</h3>
                   <p className="text-[var(--color-primary)] font-medium text-lg mb-4">{selectedMember.role}</p>
                   
-                  <div className="prose dark:prose-invert max-w-none mb-6">
+                  <div className="prose max-w-none mb-6">
                     <p>{selectedMember.bio}</p>
                   </div>
                   
                   {selectedMember.socialLinks && (
                     <div className="flex space-x-4">
                       {selectedMember.socialLinks.twitter && (
-                        <a href={selectedMember.socialLinks.twitter} className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-[var(--color-primary)] transition-colors">
+                        <a href={selectedMember.socialLinks.twitter} className="flex items-center gap-2 text-slate-700 hover:text-[var(--color-primary)] transition-colors">
                           <FaTwitter size={18} />
                           <span>Twitter</span>
                         </a>
                       )}
                       {selectedMember.socialLinks.linkedin && (
-                        <a href={selectedMember.socialLinks.linkedin} className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-[var(--color-primary)] transition-colors">
+                        <a href={selectedMember.socialLinks.linkedin} className="flex items-center gap-2 text-slate-700 hover:text-[var(--color-primary)] transition-colors">
                           <FaLinkedin size={18} />
                           <span>LinkedIn</span>
                         </a>
                       )}
                       {selectedMember.socialLinks.email && (
-                        <a href={`mailto:${selectedMember.socialLinks.email}`} className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-[var(--color-primary)] transition-colors">
+                        <a href={`mailto:${selectedMember.socialLinks.email}`} className="flex items-center gap-2 text-slate-700 hover:text-[var(--color-primary)] transition-colors">
                           <FaEnvelope size={18} />
                           <span>Email</span>
                         </a>

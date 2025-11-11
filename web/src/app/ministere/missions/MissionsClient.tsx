@@ -112,7 +112,7 @@ const MissionCard = ({ mission, isActive, onClick, index }: {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-md border border-zinc-200 dark:border-zinc-700 transition-all duration-300 ${
+      className={`bg-white rounded-xl overflow-hidden shadow-md border border-slate-200 transition-all duration-300 ${
         isActive ? 'ring-2 ring-[var(--color-primary)]' : ''
       }`}
       style={{ 
@@ -130,7 +130,7 @@ const MissionCard = ({ mission, isActive, onClick, index }: {
           <h3 className="text-xl font-bold">{mission.title}</h3>
         </div>
         
-        <p className="text-zinc-600 dark:text-zinc-300 mb-4">
+        <p className="text-slate-700 mb-4">
           {mission.description}
         </p>
         
@@ -156,9 +156,9 @@ const MissionCard = ({ mission, isActive, onClick, index }: {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-700"
+            className="mt-4 pt-4 border-t border-slate-200"
           >
-            <h4 className="font-semibold mb-2">Objectifs :</h4>
+            <h4 className="font-semibold mb-2 text-slate-900">Objectifs :</h4>
             <ul className="space-y-2">
               {mission.objectives.map((objective, i) => (
                 <motion.li
@@ -192,7 +192,7 @@ export default function MissionsClient() {
       {/* Introduction */}
       <div className="max-w-3xl mx-auto mb-16 text-center">
         <h2 className="text-3xl font-bold mb-4 text-[var(--color-primary)]">Nos Missions</h2>
-        <p className="text-lg text-zinc-700 dark:text-zinc-300">
+        <p className="text-lg text-slate-700">
           Le Ministère délégué à la Défense est chargé d'élaborer et de mettre en œuvre la politique de défense nationale, 
           de garantir la souveraineté et l'intégrité territoriale du pays, et d'assurer la sécurité des personnes et des biens.
         </p>
@@ -216,8 +216,8 @@ export default function MissionsClient() {
       </div>
 
       {/* Citation */}
-      <div className="max-w-4xl mx-auto my-20 px-6 py-10 bg-zinc-50 dark:bg-zinc-900 rounded-lg border-l-4 border-[var(--color-primary)] shadow-sm">
-        <blockquote className="text-xl italic font-medium text-zinc-800 dark:text-zinc-200">
+      <div className="max-w-4xl mx-auto my-20 px-6 py-10 bg-slate-50 rounded-lg border-l-4 border-[var(--color-primary)] shadow-sm">
+        <blockquote className="text-xl italic font-medium text-slate-900">
           "La défense nationale est l'affaire de tous. Notre mission est de protéger notre nation, 
           de préserver notre souveraineté et d'assurer un environnement sécurisé pour le développement 
           de notre pays et le bien-être de notre peuple."
@@ -230,13 +230,13 @@ export default function MissionsClient() {
       {/* Cadre légal */}
       <div className="max-w-3xl mx-auto mt-16">
         <h3 className="text-2xl font-bold mb-6 text-center text-[var(--color-primary)]">Cadre Légal</h3>
-        <div className="prose dark:prose-invert max-w-none">
-          <p>
+        <div className="prose max-w-none">
+          <p className="text-slate-700">
             Les missions du Ministère délégué à la Défense sont définies par le décret présidentiel n° XX/XX du XX/XX/20XX 
             portant organisation et fonctionnement du Gouvernement, ainsi que par la Constitution de la République Démocratique du Congo, 
             notamment en ses articles relatifs à la défense nationale et à la sécurité.
           </p>
-          <p>
+          <p className="text-slate-700">
             Le Ministère opère également dans le respect des engagements internationaux de la République Démocratique du Congo, 
             notamment les traités et accords relatifs à la paix et à la sécurité régionale et internationale.
           </p>

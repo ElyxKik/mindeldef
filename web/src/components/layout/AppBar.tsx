@@ -34,9 +34,15 @@ const navLinks: NavLink[] = [
   { href: "/fardc", label: "FARDC" },
   { href: "/anciens-combattants", label: "Anciens Combattants" },
   { href: "/actualites", label: "Actualités" },
-  { href: "/documents", label: "Documents" },
-  { href: "/marches-publics", label: "Marchés publics" },
-  { href: "/programmes", label: "Programmes" },
+  { 
+    href: "/plus", 
+    label: "Plus",
+    subMenu: [
+      { href: "/documents", label: "Documents" },
+      { href: "/marches-publics", label: "Marchés publics" },
+      { href: "/programmes", label: "Programmes" },
+    ]
+  },
   { href: "/recherche", label: "Recherche" },
   { href: "/contact", label: "Contact" },
 ];
@@ -65,9 +71,9 @@ export default function AppBar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-      <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" aria-label="Accueil Ministère délégué à la Défense">
+    <header className="sticky top-0 z-50 bg-slate-100 border-b border-slate-300">
+      <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-center relative">
+        <Link href="/" className="absolute left-4 flex items-center gap-2" aria-label="Accueil Ministère délégué à la Défense">
           <img src="/logo-min-mindeldef.png" alt="Logo Ministère délégué à la Défense" className="h-12" />
         </Link>
         
@@ -79,7 +85,7 @@ export default function AppBar() {
                 <>
                   <button 
                     onClick={() => handleSubmenuToggle(link.label)}
-                    className={`h-full flex items-center focus:outline-none transition-colors ${pathname.startsWith(link.href) ? 'text-[var(--color-primary)]' : 'text-slate-700 dark:text-slate-300'} hover:text-[var(--color-primary)]`}
+                    className={`h-full flex items-center focus:outline-none transition-colors ${pathname.startsWith(link.href) ? 'text-[var(--color-primary)]' : 'text-slate-700'} hover:text-[var(--color-primary)]`}
                     aria-expanded={activeSubmenu === link.label}
                     aria-haspopup="true"
                   >
@@ -98,8 +104,8 @@ export default function AppBar() {
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.2 }}
                         className={link.label === "Ministère" ? 
-                          "absolute left-1/2 transform -translate-x-1/2 top-full mt-2 bg-white dark:bg-slate-800 shadow-md rounded-lg border border-slate-200 dark:border-slate-700 w-[500px] z-50" :
-                          "absolute left-0 top-full mt-2 py-1 bg-white dark:bg-slate-800 shadow-md rounded-lg border border-slate-200 dark:border-slate-700 min-w-48 z-50"
+                          "absolute left-1/2 transform -translate-x-1/2 top-full mt-2 bg-white shadow-lg rounded-lg border border-slate-200 w-[500px] z-50" :
+                          "absolute left-0 top-full mt-2 bg-white shadow-lg rounded-lg border border-slate-200 min-w-56 z-50"
                         }
                       >
                         {link.label === "Ministère" ? (
@@ -107,17 +113,17 @@ export default function AppBar() {
                           <div className="p-6">
                             <div className="mb-4">
                               <h3 className="text-lg font-semibold text-[var(--color-primary)] mb-2">Le Ministère</h3>
-                              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                              <p className="text-sm text-gray-600 mb-4">
                                 Découvrez l'organisation, les missions et les responsabilités du Ministère délégué à la Défense
                               </p>
                             </div>
                             <div className="grid grid-cols-2 gap-6">
                               <div>
-                                <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Organisation</h4>
+                                <h4 className="font-medium text-gray-900 mb-3">Organisation</h4>
                                 <div className="space-y-2">
                                   <Link 
                                     href="/ministere/ministre"
-                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors group"
                                     onClick={() => setActiveSubmenu(null)}
                                   >
                                     <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
@@ -132,7 +138,7 @@ export default function AppBar() {
                                   </Link>
                                   <Link 
                                     href="/ministere/cabinet"
-                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors group"
                                     onClick={() => setActiveSubmenu(null)}
                                   >
                                     <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
@@ -147,7 +153,7 @@ export default function AppBar() {
                                   </Link>
                                   <Link 
                                     href="/ministere/organigramme"
-                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors group"
                                     onClick={() => setActiveSubmenu(null)}
                                   >
                                     <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
@@ -163,11 +169,11 @@ export default function AppBar() {
                                 </div>
                               </div>
                               <div>
-                                <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Missions & Attributions</h4>
+                                <h4 className="font-medium text-gray-900 mb-3">Missions & Attributions</h4>
                                 <div className="space-y-2">
                                   <Link 
                                     href="/ministere/missions"
-                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors group"
                                     onClick={() => setActiveSubmenu(null)}
                                   >
                                     <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
@@ -182,7 +188,7 @@ export default function AppBar() {
                                   </Link>
                                   <Link 
                                     href="/ministere/attributions"
-                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors group"
+                                    className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors group"
                                     onClick={() => setActiveSubmenu(null)}
                                   >
                                     <div className="w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center mr-3">
@@ -202,12 +208,12 @@ export default function AppBar() {
                           </div>
                         ) : (
                           // Menu classique pour les autres éléments
-                          <div className="py-2">
+                          <div className="py-1">
                             {link.subMenu.map((subItem) => (
                               <Link 
                                 key={subItem.href} 
                                 href={subItem.href}
-                                className={`block px-4 py-2 transition-colors ${pathname === subItem.href ? 'text-[var(--color-primary)] font-medium' : 'text-slate-700 dark:text-slate-300'} hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-[var(--color-primary)]`}
+                                className={`block px-4 py-3 text-sm transition-all duration-200 ${pathname === subItem.href ? 'text-[var(--color-primary)] font-semibold bg-blue-50' : 'text-slate-700'} hover:bg-slate-50 hover:text-[var(--color-primary)] hover:font-medium first:rounded-t-md last:rounded-b-md`}
                                 onClick={() => setActiveSubmenu(null)}
                               >
                                 {subItem.label}
@@ -222,7 +228,7 @@ export default function AppBar() {
               ) : (
                 <Link 
                   href={link.href} 
-                  className={`h-full flex items-center transition-colors ${pathname === link.href ? 'text-[var(--color-primary)]' : 'text-slate-700 dark:text-slate-300'} hover:text-[var(--color-primary)]`}
+                  className={`h-full flex items-center transition-colors ${pathname === link.href ? 'text-[var(--color-primary)]' : 'text-slate-700'} hover:text-[var(--color-primary)]`}
                 >
                   {link.label}
                 </Link>
@@ -234,7 +240,7 @@ export default function AppBar() {
         {/* Bouton menu mobile */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 relative z-50"
+          className="md:hidden absolute right-4 flex flex-col justify-center items-center w-10 h-10 z-50"
           aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={isOpen}
         >
@@ -264,7 +270,7 @@ export default function AppBar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-md z-40"
+            className="md:hidden absolute top-16 left-0 right-0 bg-white border-b border-slate-200 shadow-md z-40"
           >
             <nav className="flex flex-col py-4 px-6">
               {navLinks.map((link, i) => (
@@ -273,7 +279,7 @@ export default function AppBar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.3 }}
-                  className="border-b border-zinc-100 dark:border-zinc-800 last:border-0"
+                  className="border-b border-zinc-100 last:border-0"
                 >
                   {link.subMenu ? (
                     <div>
@@ -298,7 +304,7 @@ export default function AppBar() {
                               <Link 
                                 key={subItem.href} 
                                 href={subItem.href}
-                                className={`block py-2 pl-2 border-l-2 border-zinc-200 dark:border-zinc-700 transition-colors ${pathname === subItem.href ? 'font-bold text-[var(--color-primary)]' : ''} hover:text-[var(--color-primary)] hover:font-bold`}
+                                className={`block py-2 pl-2 border-l-2 border-zinc-200 transition-colors ${pathname === subItem.href ? 'font-bold text-[var(--color-primary)]' : ''} hover:text-[var(--color-primary)] hover:font-bold`}
                                 onClick={() => setIsOpen(false)}
                               >
                                 {subItem.label}

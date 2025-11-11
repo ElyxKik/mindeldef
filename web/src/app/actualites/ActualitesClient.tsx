@@ -33,7 +33,7 @@ const CategoryFilter = ({
       className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
         activeCategory === "all"
           ? "bg-[var(--color-primary)] text-white"
-          : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+          : "bg-slate-100 text-slate-700 hover:bg-slate-200"
       }`}
     >
       Toutes les actualités
@@ -46,7 +46,7 @@ const CategoryFilter = ({
         className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
           activeCategory === category
             ? "bg-[var(--color-primary)] text-white"
-            : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+            : "bg-slate-100 text-slate-700 hover:bg-slate-200"
         }`}
       >
         {category}
@@ -61,7 +61,7 @@ const FeaturedArticle = ({ article }: { article: Article }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
-    className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 mb-12"
+    className="relative bg-white rounded-lg overflow-hidden shadow-lg border border-slate-200 mb-12"
   >
     <div className="relative h-[300px] md:h-[400px]">
       <Image
@@ -102,7 +102,7 @@ const ArticleCard = ({ article, index }: { article: Article; index: number }) =>
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700 flex flex-col h-full"
+    className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-slate-200 flex flex-col h-full"
   >
     <div className="relative h-48">
       <Image
@@ -120,9 +120,9 @@ const ArticleCard = ({ article, index }: { article: Article; index: number }) =>
     </div>
     <div className="p-5 flex flex-col flex-grow">
       <h3 className="text-xl font-bold mb-2 line-clamp-2">{article.title}</h3>
-      <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 flex-grow">{article.excerpt}</p>
+      <p className="text-slate-700 mb-4 line-clamp-3 flex-grow">{article.excerpt}</p>
       <div className="flex items-center justify-between mt-auto">
-        <span className="text-gray-500 dark:text-gray-400 text-sm">{article.date}</span>
+        <span className="text-slate-600 text-sm">{article.date}</span>
         <Link 
           href={article.href}
           className="text-[var(--color-primary)] hover:underline font-medium flex items-center"
@@ -280,16 +280,16 @@ export default function ActualitesClient() {
       {filteredArticles.length > 6 && (
         <div className="mt-12 flex justify-center">
           <nav className="inline-flex rounded-md shadow">
-            <a href="#" className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-sm font-medium rounded-l-md hover:bg-gray-50 dark:hover:bg-gray-700">
+            <a href="#" className="px-4 py-2 bg-white border border-slate-300 text-sm font-medium rounded-l-md hover:bg-slate-50 text-slate-700">
               Précédent
             </a>
             <a href="#" className="px-4 py-2 bg-[var(--color-primary)] text-white text-sm font-medium">
               1
             </a>
-            <a href="#" className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700">
+            <a href="#" className="px-4 py-2 bg-white border border-slate-300 text-sm font-medium hover:bg-slate-50 text-slate-700">
               2
             </a>
-            <a href="#" className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-sm font-medium rounded-r-md hover:bg-gray-50 dark:hover:bg-gray-700">
+            <a href="#" className="px-4 py-2 bg-white border border-slate-300 text-sm font-medium rounded-r-md hover:bg-slate-50 text-slate-700">
               Suivant
             </a>
           </nav>

@@ -2,8 +2,5 @@
   "buildCommand": "cd web && npm run build",
   "installCommand": "cd web && npm install",
   "outputDirectory": "web/.next",
-  "framework": "nextjs",
-  "env": {
-    "NEXT_PUBLIC_SITE_URL": "@next_public_site_url"
-  }
+  "framework": "nextjs"
 }
